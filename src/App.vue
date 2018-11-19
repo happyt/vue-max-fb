@@ -1,8 +1,9 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="sideNav">
+    <v-navigation-drawer temporary v-model="sideNav">
       <v-list>
-       <v-list-tile v-for="item in menuItems" :key="item.title">
+       <v-list-tile v-for="item in menuItems" :key="item.title"
+                        :to="item.link">
          <v-list-tile-action>
            <v-icon>
              {{item.icon}}
@@ -13,43 +14,43 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app>
-      <v-toolbar-side-icon @click.native.stop="sideNav = !sideNav"
+      <v-toolbar-side-icon @click.stop="sideNav = !sideNav"
       class="hidden-sm-and-up"></v-toolbar-side-icon>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Max example</span>
+        <router-link to="/" tag="span" style="cursor: pointer">Max example</router-link>
       </v-toolbar-title>
        <v-spacer></v-spacer>
        <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat v-for="item in menuItems" :key="item.title">
+        <v-btn flat v-for="item in menuItems" :key="item.title"
+                        :to="item.link">
           <v-icon left>{{item.icon}}</v-icon>
           <span class="mr-2">{{item.title}}</span>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-
     <v-content>
-      <HelloWorld/>
-    </v-content>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-content>    
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-
 export default {
   name: 'App',
   components: {
-    HelloWorld
   },
   data () {
     return {
       sideNav: false,
       menuItems: [
-        { icon: 'supervisor_account', title: 'View Listings'},
-        { icon: 'room', title: 'Organise Meetups'},
-        { icon: 'person', title: 'Profile'},
-        { icon: 'face', title: 'Sign Up'},
-        { icon: 'lock_open', title: 'Sign In'}
+        { icon: 'home', title: 'View Listings', link: '/meetups'},
+        { icon: 'room', title: 'Organise Meetups', link: '/meetup/new'},
+        { icon: 'person', title: 'Profile', link: '/profile'},
+        { icon: 'face', title: 'Sign Up', link: '/signup'},
+        { icon: 'lock_open', title: 'Sign In', link: '/signin'},
+        { icon: 'group_work', title: 'About', link: '/about'}
       ]
     }
   }
