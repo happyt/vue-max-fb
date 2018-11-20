@@ -2,10 +2,11 @@
     <span>
         <v-layout row wrap class="mt-2">
             <v-flex xs12>
-                <v-carousel>
+                <v-carousel style="cursor: pointer;">
                     <v-carousel-item v-for="(item) in meetups"
                     v-bind:src="item.imageUrl"
-                    :key="item.id">
+                    :key="item.id"
+                    @click="onLoadMeetup()">
                     <div class="title">
                         {{item.title}}
                     </div>
@@ -29,6 +30,11 @@ export default {
                 {imageUrl: 'https://media.istockphoto.com/photos/cityscape-of-paris-by-the-sunset-picture-id604371970?k=6&m=604371970&s=612x612&w=0&h=M7MvwJMPYLJS6VB3jUlvmWxiJAlXbddzOivgI0Ys9Js=', id: 'def', title: 'Paris'},
                 {imageUrl: 'http://homecaprice.com/wp-content/uploads/2015/10/palace-of-london-home-caprice.jpg', id: 'ghi', title: 'London'}
             ]
+        }
+    },
+    methods: {
+        onLoadMeetup(id) {
+            this.$router.push('/meetup/' + id)
         }
     }
 }

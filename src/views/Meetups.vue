@@ -1,24 +1,45 @@
 <template>
     <v-container>
-        <v-layout row wrap class="mb-2">
-            <v-flex xs12 sm6 class='text-xs-center text-sm-right' >
-                <v-btn large router to="/meetups" class='secondary'>Explore meetups</v-btn>
-            </v-flex>
-            <v-flex xs12 sm6 class='text-xs-center text-sm-left' >
-                <v-btn large router to="/meetup/new" class='info'>Organise meetup</v-btn>
+        <v-layout row wrap>
+            <v-flex xs12 sm10 md8 offset-sm1 offset-md2>
+                <v-card class="info">
+                    <v-container fluid>
+                        <v-layout row>
+                            <v-flex xs5 sm4 md3>
+                                <v-card-media 
+                                    src="https://wallpaperbrowse.com/media/images/soap-bubble-1958650_960_720.jpg"
+                                    height="130px"
+                                    >
+                                </v-card-media>
+                            </v-flex>
+                            <v-flex xs7 sm8 md9>
+                                <v-card-title primary-title>
+                                    <div>
+                                        <h3 class="white--text" mb-0>Unlimited</h3>
+                                        <div>Listen on and offline as well</div>
+                                    </div>
+                                </v-card-title>
+                                <v-card-actions>
+                                    <v-btn flat to="/meetup/1">
+                                        <v-icon left light>arrow_forward</v-icon>
+                                        View Item
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card>
             </v-flex>
         </v-layout>
-        <Carousel />
     </v-container>
 </template>
 
 <script>
-import Carousel from '@/components/Carousel.vue'
 
 export default {
     name: 'meetups',
     components: {
-        Carousel
+        
     }
 }
 </script>
