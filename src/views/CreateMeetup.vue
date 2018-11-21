@@ -48,14 +48,31 @@
                     </v-layout>
                     <v-layout row>
                         <v-flex xs12 sm6 offset-sm3>
-                            <v-text-field
+                            <v-textarea
                                     name="description"
                                     label="Description"
                                     id="description"
                                     v-model="description"
                                     multi-line
                                     required>
-                            </v-text-field> 
+                            </v-textarea> 
+                        </v-flex>
+                    </v-layout>
+                     <v-layout row>
+                        <v-flex xs12 sm6 offset-sm3>
+                           <h4>Choose date and time</h4>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row class="mb-2">
+                        <v-flex xs12 sm6 offset-sm3>
+                           <v-date-picker v-model="date"></v-date-picker>
+                           <p>{{date}}</p>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row>
+                        <v-flex xs12 sm6 offset-sm3>
+                           <v-time-picker v-model="time" format="24hr"></v-time-picker>
+                            <p>{{time}}</p>
                         </v-flex>
                     </v-layout>
                     <v-layout row>
@@ -63,6 +80,7 @@
                            <v-btn class="info" 
                                     :disabled="!formIsValid"
                                     type="submit">Create</v-btn>
+                                {{submittableDateTime}}
                         </v-flex>
                     </v-layout>
                 </form>
@@ -78,7 +96,9 @@ export default {
             title: '',
             location: '',
             imageUrl: 'https://www.w3schools.com/w3images/fjords.jpg',
-            description: ''
+            description: '',
+            date: '2017-07-19',
+            time: '1:23'
         }
     },
     computed: {
@@ -87,6 +107,21 @@ export default {
              && this.location !== '' 
              && this.imageUrl !== '' 
              && this.description !== '' 
+        },
+        submittableDateTime () {
+            const date = new Date(this.date)
+            if (typeof this.time === 'string') {
+                console.log('time:', this.time)
+                const hours = this.time.match(/^(\d+)/)[1]
+                const minutes = this.time.match(/:(\d+)/)[1]
+                date.setHours(hours)
+                date.setMinutes(minutes)
+            } else {
+                date.setHours(this.time.getHours())
+                date.setMinutes(this.time.getMinutes())
+            }
+            console.log(date)
+            return date
         }
     },
     methods: {
@@ -99,7 +134,7 @@ export default {
                 location: this.location,
                 imageUrl: this.imageUrl,
                 description: this.description,
-                date: new Date()
+                date: this.submittableDateTime
             }
             this.$store.dispatch('createMeetup', meetupData)
             this.$router.push('/meetups')
