@@ -25,11 +25,12 @@
 export default {
     data () {
         return {
-            meetups: [
-                {imageUrl: 'http://img.over-blog-kiwi.com/1/76/78/35/20160329/ob_ea2688_statue-lib.jpg', id: 'abc', title: 'New York'},
-                {imageUrl: 'https://media.istockphoto.com/photos/cityscape-of-paris-by-the-sunset-picture-id604371970?k=6&m=604371970&s=612x612&w=0&h=M7MvwJMPYLJS6VB3jUlvmWxiJAlXbddzOivgI0Ys9Js=', id: 'def', title: 'Paris'},
-                {imageUrl: 'http://homecaprice.com/wp-content/uploads/2015/10/palace-of-london-home-caprice.jpg', id: 'ghi', title: 'London'}
-            ]
+            
+        }
+    },
+    computed: {
+        meetups () {
+            return this.$store.getters.loadedMeetups
         }
     },
     methods: {

@@ -4,16 +4,16 @@
             <v-flex xs12>
                 <v-card>
                     <v-card-title>
-                        <h5 class="primary--text">The Meetup</h5>
+                        <h5 class="primary--text">{{ meetup.title }}</h5>
                     </v-card-title>
                     <v-card-media 
-                        src="https://wallpaperbrowse.com/media/images/soap-bubble-1958650_960_720.jpg"
+                        :src="meetup.imageUrl"
                         height="400px"
                         >
                     </v-card-media>
                     <v-card-text>
                         <div class="info--text">
-                            The date or something here
+                            {{meetup.date}}
                         </div>
                         <div>
                             lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
@@ -30,3 +30,14 @@
         </v-layout>
     </v-container>
 </template>
+
+<script>
+export default {
+    props: ['id'],
+    computed: {
+        meetup () {
+            return this.$store.getters.loadedMeetup(this.id)
+        }
+    }
+}
+</script>
