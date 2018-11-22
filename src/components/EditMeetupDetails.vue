@@ -10,6 +10,7 @@
             <v-card-title>Edit Meetup</v-card-title>
           </v-flex>
         </v-layout>
+        <v-divider></v-divider>
         <v-layout row wrap>
           <v-flex xs12>
             <v-card-text>

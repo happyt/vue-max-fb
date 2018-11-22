@@ -7,12 +7,16 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import DateFilter from './Filters/date'
-import AlertCmp from '@/components/EditMeetupDetails.vue'
+import EditDetails from '@/components/EditMeetupDetails.vue'
+import EditDate from '@/components/EditMeetupDate.vue'
+import EditTime from '@/components/EditMeetupTime.vue'
 
 Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
-Vue.component('edit-details-dialog', AlertCmp)
+Vue.component('edit-details-dialog', EditDetails)
+Vue.component('edit-date-dialog', EditDate)
+Vue.component('edit-time-dialog', EditTime)
 
 new Vue({
   router,
