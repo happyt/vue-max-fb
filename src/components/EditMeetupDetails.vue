@@ -41,10 +41,10 @@
           <v-flex xs12>
             <v-card-actions>
               <v-btn flat class="blue--text darken-1"
-                              @click="onSaveChanges">Save</v-btn>
-              <v-btn flat class="blue--text darken-1"
                               @click="editDialog = false">Cancel</v-btn>
-            </v-card-actions>
+               <v-btn flat class="blue--text darken-1"
+                              @click="onSaveChanges">Save</v-btn>
+           </v-card-actions>
           </v-flex>
         </v-layout>
       </v-container>

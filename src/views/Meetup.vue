@@ -43,7 +43,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn class="primary">Register</v-btn>
+                        <v-btn class="secondary">Register</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
