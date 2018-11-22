@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-layout v-if="error">
+      <v-flex xs12 sm6 offset-sm3>
+        <Alert @dismissed="onDismissed" :text="error.message"> </Alert>
+      </v-flex>
+    </v-layout>
     <v-layout>
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
@@ -57,6 +62,8 @@
 </template>
 
 <script>
+import Alert from '@/components/Alert.vue'
+
 export default {
   data () {
     return {
@@ -65,15 +72,36 @@ export default {
       confirmPassword: ''
     }
   },
+  components: {
+      Alert
+  },
   computed: {
     comparePasswords () {
       return this.password !== this.confirmPassword ? 'Passords are different' : ''
+    },
+    user () {
+      return this.$store.getters.user
+    },
+    error () {
+      return this.$store.getters.error
+    }
+
+
+  },
+  watch: {
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      }
     }
   },
   methods: {
     onSignup () {
       // Vuex
       this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+    },
+    onDismissed () {
+      this.$store.dispatch('clearError')
     }
   }
 }

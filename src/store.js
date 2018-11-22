@@ -23,10 +23,9 @@ export default new Vuex.Store({
        description: 'Party in the park'
       }
     ],
-    user: {
-      id: 'abc',
-      registeredMeetups: ['apple']
-    }
+    user: null,
+    loading: false,
+    error: null
   },
   mutations: {
     createMeetup (state, payload) {
@@ -34,6 +33,15 @@ export default new Vuex.Store({
     },
     setUser (state, payload) {
       state.user = payload
+    },
+    setLoading (state, payload) {
+      state.loading = payload
+    },
+    setError (state, payload) {
+      state.error = payload
+    },
+    clearError (state) {
+      state.error = null
     }
   },
   actions: {
@@ -50,9 +58,12 @@ export default new Vuex.Store({
       commit('createMeetup', meetup)
     },
     signUserUp ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearError')
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(
         reply => {
+          commit('setLoading', false)
           const newUser = {
             id: reply.user.uid,
             registeredMeetups: []
@@ -62,9 +73,36 @@ export default new Vuex.Store({
       )
       .catch(
         error => {
+          commit('setLoading', false)
+          commit('setError', error)
           console.log(error)
         }
       )
+    },
+    signUserIn ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearError')
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+      .then(
+        reply => {
+          commit('setLoading', false)
+          const newUser = {
+            id: reply.user.uid,
+            registeredMeetups: []
+          }
+          commit('setUser', newUser)
+        }
+      )
+      .catch(
+        error => {
+          commit('setLoading', false)
+          commit('setError', error)
+          console.log(error)
+        }
+      )
+    },
+    clearError ({commit}) {
+      commit('clearError')
     }
   },
   getters: {
@@ -82,6 +120,15 @@ export default new Vuex.Store({
           return meetup.id === meetupId
         })
       }
+    },
+    user (state) {
+      return state.user
+    },
+    error (state) {
+      return state.error
+    },
+    loading (state) {
+      return state.loading
     }
   }
 })
