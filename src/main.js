@@ -7,10 +7,12 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import DateFilter from './Filters/date'
+import AlertCmp from '@/components/EditMeetupDetails.vue'
 
 Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
+Vue.component('edit-details-dialog', AlertCmp)
 
 new Vue({
   router,
