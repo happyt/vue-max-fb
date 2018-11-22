@@ -111,7 +111,6 @@ export default {
         submittableDateTime () {
             const date = new Date(this.date)
             if (typeof this.time === 'string') {
-                console.log('time:', this.time)
                 const hours = this.time.match(/^(\d+)/)[1]
                 const minutes = this.time.match(/:(\d+)/)[1]
                 date.setHours(hours)
@@ -120,7 +119,6 @@ export default {
                 date.setHours(this.time.getHours())
                 date.setMinutes(this.time.getMinutes())
             }
-            console.log(date)
             return date
         }
     },
