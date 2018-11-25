@@ -10,6 +10,7 @@ import DateFilter from './Filters/date'
 import EditDetails from '@/components/EditMeetupDetails.vue'
 import EditDate from '@/components/EditMeetupDate.vue'
 import EditTime from '@/components/EditMeetupTime.vue'
+import Register from '@/components/RegisterDialog.vue'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,7 @@ Vue.filter('date', DateFilter)
 Vue.component('edit-details-dialog', EditDetails)
 Vue.component('edit-date-dialog', EditDate)
 Vue.component('edit-time-dialog', EditTime)
+Vue.component('register-dialog', Register)
 
 new Vue({
   router,

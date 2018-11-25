@@ -43,7 +43,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn class="secondary">Register</v-btn>
+                        <register-dialog :meetupId="meetup.id"></register-dialog>
                     </v-card-actions>
                 </v-card>
             </v-flex>
