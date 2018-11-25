@@ -8,7 +8,7 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-card-title v-if="userIsRegistered">Unregister from Meetup</v-card-title>
-            <v-card-title v-else>Unregister forMeetup</v-card-title>
+            <v-card-title v-else>Register for Meetup</v-card-title>
           </v-flex>
         </v-layout>
         <v-divider></v-divider>
@@ -54,7 +54,13 @@ export default {
   },
   methods: {
     onAgree () {
-
+      if (this.userIsRegistered) {
+        console.log('was registered')
+        this.$store.dispatch('unregisterUserForMeetup', this.meetupId)
+      } else {
+        console.log('not registered')
+        this.$store.dispatch('registerUserForMeetup', this.meetupId)
+      }
     }
   }
 }

@@ -31,6 +31,7 @@ new Vue({
         // User is signed in and currentUser will no longer return null.
         console.log("Auth: signed in")
         this.$store.dispatch('autoSignIn', user)
+        this.$store.dispatch('fetchUserData')
       } else {
         // No user is signed in.
         console.log("Auth: not signed in")
