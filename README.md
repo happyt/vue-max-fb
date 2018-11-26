@@ -11,19 +11,49 @@ yarn run serve
 ```
 
 ### Compiles and minifies for production
+vue create vue-max-fb
+* router, vuex, eslint
 ```
+vue add vuetify. v1.3.8
+yarn serve
+
 yarn run build
 ```
+.env file for environment variables
 
-### Run your tests
+vuetify puts in 
 ```
-yarn run test
+<v-content>
+<HelloWorld/>
+</v-content>
 ```
+need to replace with 
+```
+<v-content>
+<v-container fluid>
+<router-view></router-view>
+</v-container>
+</v-content>
+```
+add to routes to remove #
+```
+,
+mode: 'history'
+```
+Here use firebase
+```
+yarn add firebase
 
-### Lints and fixes files
+import * as firebase from 'firebase'
+var fbconfig = require(`./fb-config.js`)
 ```
-yarn run lint
+fb-config.js
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+module.export = {
+    apiKey: "",
+    authDomain: ",
+    databaseURL: ",
+    projectId: "",
+    storageBucket: "",
+  }
+```
