@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as firebase from 'firebase'
+import {FB_DB} from './constants'
 
 Vue.use(Vuex)
 
@@ -112,7 +113,7 @@ export default new Vuex.Store({
     },
     loadMeetups ({commit}) {
       commit('setLoading', true)
-      firebase.database().ref('meetups').once('value')
+      firebase.database().ref(FB_DB).once('value')
       .then((data) => {
         const meetups = []
         const obj = data.val()
@@ -147,7 +148,7 @@ export default new Vuex.Store({
       // store in firebase
       let imageUrl
       let key
-      firebase.database().ref('meetups').push(meetup)
+      firebase.database().ref(FB_DB).push(meetup)
       .then((data) => {
         key = data.key
         return key
@@ -165,7 +166,7 @@ export default new Vuex.Store({
       })
       .then(url => {
         imageUrl = url;
-        return firebase.database().ref('meetups').child(key).update({imageUrl: imageUrl})
+        return firebase.database().ref(FB_DB).child(key).update({imageUrl: imageUrl})
       })
       .then(() => {
         commit('createMeetup', {
@@ -190,7 +191,7 @@ export default new Vuex.Store({
       if (payload.date) {
         updateObj.date = payload.date
       }
-      firebase.database().ref('meetups').child(payload.id).update(updateObj)
+      firebase.database().ref(FB_DB).child(payload.id).update(updateObj)
       .then(() => {
         commit('setLoading', false)
         commit('updateMeetup', payload)

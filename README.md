@@ -60,6 +60,7 @@ module.export = {
 
 need change/add
 - modules
+- better components/modules
 - strings for consts
 - separate file for consts
 - phone auth
