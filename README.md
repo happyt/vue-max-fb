@@ -57,3 +57,10 @@ module.export = {
     storageBucket: "",
   }
 ```
+
+need change/add
+- modules
+- strings for consts
+- separate file for consts
+- phone auth
+- PWA
