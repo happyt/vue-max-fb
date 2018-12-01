@@ -122,7 +122,7 @@ export default {
         newKey () {
             // create our own key to avoid fb odd characters
             let uid = (new Date().getTime()).toString(36)
-            console.log(uid)
+            console.log(new Date().getTime(), uid)
             return 'B' + uid + Math.floor(Math.random() *  1000)
         }
     },
