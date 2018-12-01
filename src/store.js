@@ -12,21 +12,12 @@ export default new Vuex.Store({
        id: '1', title: 'New York', date: new Date(),
        location: 'New York City',
        description: 'Dummy data - Marathon runners in the extreme'
-      },
-      {imageUrl: 'http://img.over-blog-kiwi.com/1/76/78/35/20160329/ob_ea2688_statue-lib.jpg',
-       id: '1', title: 'New York', date: new Date(),
-       location: 'New York City',
-       description: 'Dummy data - Marathon runners in the extreme'
-      },
-      {imageUrl: 'http://img.over-blog-kiwi.com/1/76/78/35/20160329/ob_ea2688_statue-lib.jpg',
-       id: '1', title: 'New York', date: new Date(),
-       location: 'New York City',
-       description: 'Dummy data - Marathon runners in the extreme'
       }
     ],
     user: null,
     loading: false,
-    error: null
+    error: null,
+    keyIndex: 1
   },
   mutations: {
     registerUserForMeetup ( state, payload) {
@@ -147,13 +138,13 @@ export default new Vuex.Store({
       }
       // store in firebase
       let imageUrl
-      let key
-      firebase.database().ref(FB_DB).push(meetup)
-      .then((data) => {
-        key = data.key
-        return key
-      })
-      .then(key => {
+      let key = payload.id
+      firebase.database().ref(FB_DB).child(key).set(meetup)
+      // .then((data) => {    // old verssion used 'put' and returned the key
+      //   key = data.key
+      //   return key
+      // })
+      .then( () => {
         // store image
         const filename = payload.image.name
         const ext = filename.slice(filename.lastIndexOf('.'))
@@ -313,5 +304,6 @@ export default new Vuex.Store({
     loading (state) {
       return state.loading
     }
+
   }
 })
